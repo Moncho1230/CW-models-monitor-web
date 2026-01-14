@@ -7,7 +7,6 @@ export function parseTextRank(text: string): RankRow[] {
     .map(line => line.trim())
     .filter(Boolean)
     .map(line => {
-      // separa por tabs o múltiples espacios
       const parts = line.split(/\t+|\s{2,}/)
 
       const name = parts[0]
@@ -15,10 +14,11 @@ export function parseTextRank(text: string): RankRow[] {
 
       if (!name || !creditsRaw) return null
 
-      return {
-        name,
-        credits: parseCredits(creditsRaw)
-      }
+      const credits = parseCredits(creditsRaw)
+
+      if (credits <= 0) return null
+
+      return { name, credits }
     })
     .filter((row): row is RankRow => row !== null)
 }
