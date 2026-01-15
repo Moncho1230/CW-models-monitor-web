@@ -3,7 +3,8 @@ import { RankRow } from '@/types/model'
 export function formatTopAnual(
   ranking: RankRow[],
   year: number,
-  genderLabel: string
+  genderLabel: string,
+  previousWinner?: string
 ): string {
   const prizes: Record<number, number> = {
     1: 2_000_000,
@@ -34,6 +35,13 @@ export function formatTopAnual(
       lines.push(`💰 $200.000`)
     }
   })
+
+  // 👇 BLOQUE GANADOR AÑO ANTERIOR
+  if (previousWinner && previousWinner.trim()) {
+    lines.push('')
+    lines.push('GANADOR AÑO ANTERIOR')
+    lines.push(`${year} ${previousWinner.toUpperCase()} 🎊🏆`)
+  }
 
   return lines.join('\n')
 }
