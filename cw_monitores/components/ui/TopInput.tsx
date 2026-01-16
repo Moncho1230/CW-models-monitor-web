@@ -2,12 +2,10 @@
 
 type Props = {
   currentText: string
-  setCurrentText: React.Dispatch<React.SetStateAction<string>>
+  setCurrentText: (value: string) => void
   onAddTop: () => void
-  feedback?: string | null
-  gender: 'men' | 'women'
-  setGender: React.Dispatch<React.SetStateAction<'men' | 'women'>>
-  buttonLabel?: string
+  feedback: string | null
+  buttonLabel: string
 }
 
 export default function TopInput({
@@ -15,50 +13,26 @@ export default function TopInput({
   setCurrentText,
   onAddTop,
   feedback,
-  gender,
-  setGender,
-  buttonLabel = '➕ Agregar Top'
+  buttonLabel
 }: Props) {
   return (
-    <div className="space-y-3">
-      {/* Selector de género */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => setGender('men')}
-          className={`px-3 py-1 rounded ${
-            gender === 'men' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-          }`}
-        >
-          👨 Hombres
-        </button>
-
-        <button
-          onClick={() => setGender('women')}
-          className={`px-3 py-1 rounded ${
-            gender === 'women' ? 'bg-pink-600 text-white' : 'bg-gray-200'
-          }`}
-        >
-          👩 Mujeres
-        </button>
-      </div>
-
-      {/* Área de texto */}
+    <div className="space-y-4">
       <textarea
+        className="w-full h-48 border rounded p-3"
+        placeholder="Pega aquí el ranking..."
         value={currentText}
         onChange={e => setCurrentText(e.target.value)}
-        placeholder="Pega aquí el ranking..."
-        className="w-full h-40 border rounded p-2"
       />
 
-      {/* Feedback */}
       {feedback && (
-        <p className="text-sm text-red-600 font-medium">{feedback}</p>
+        <div className="text-red-600 text-sm font-medium">
+          {feedback}
+        </div>
       )}
 
-      {/* Botón */}
       <button
         onClick={onAddTop}
-        className="w-full bg-green-600 text-white py-2 rounded font-semibold"
+        className="bg-green-600 hover:bg-green-700 text-white py-3 rounded w-full text-lg font-semibold"
       >
         {buttonLabel}
       </button>
