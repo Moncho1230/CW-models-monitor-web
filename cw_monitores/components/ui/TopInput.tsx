@@ -4,8 +4,13 @@ type Props = {
   currentText: string
   setCurrentText: (value: string) => void
   onAddTop: () => void
-  feedback: string | null
-  buttonLabel: string
+  feedback?: string | null
+
+  /** OPCIONAL */
+  gender?: 'men' | 'women'
+  setGender?: (value: 'men' | 'women') => void
+
+  buttonLabel?: string
 }
 
 export default function TopInput({
@@ -13,26 +18,60 @@ export default function TopInput({
   setCurrentText,
   onAddTop,
   feedback,
-  buttonLabel
+  gender,
+  setGender,
+  buttonLabel = '➕ Agregar Top'
 }: Props) {
   return (
     <div className="space-y-4">
+
+      {/* SELECTOR DE GÉNERO (SOLO SI SE ENVÍA) */}
+      {gender && setGender && (
+        <div className="flex gap-2">
+          <button
+            onClick={() => setGender('men')}
+            className={`px-4 py-2 rounded ${
+              gender === 'men'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200'
+            }`}
+          >
+            👨 Hombres
+          </button>
+
+          <button
+            onClick={() => setGender('women')}
+            className={`px-4 py-2 rounded ${
+              gender === 'women'
+                ? 'bg-pink-600 text-white'
+                : 'bg-gray-200'
+            }`}
+          >
+            👩 Mujeres
+          </button>
+        </div>
+      )}
+
+      {/* TEXTAREA */}
       <textarea
-        className="w-full h-48 border rounded p-3"
-        placeholder="Pega aquí el ranking..."
         value={currentText}
         onChange={e => setCurrentText(e.target.value)}
+        placeholder="Pega aquí el ranking..."
+        rows={8}
+        className="w-full border p-3 rounded"
       />
 
+      {/* FEEDBACK */}
       {feedback && (
-        <div className="text-red-600 text-sm font-medium">
+        <div className="text-sm text-gray-700">
           {feedback}
         </div>
       )}
 
+      {/* BOTÓN */}
       <button
         onClick={onAddTop}
-        className="bg-green-600 hover:bg-green-700 text-white py-3 rounded w-full text-lg font-semibold"
+        className="w-full bg-green-600 text-white px-4 py-2 rounded"
       >
         {buttonLabel}
       </button>
