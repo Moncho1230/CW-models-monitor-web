@@ -105,53 +105,75 @@ export default function TopPayPeriodPage() {
 
           {/* METADATA */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
             <input
               placeholder="Día (Ej: DÍA 3)"
               value={day}
               onChange={e => setDay(e.target.value)}
-              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-600"
+              className="bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
             />
 
             <input
               placeholder="Campeón"
               value={champion}
               onChange={e => setChampion(e.target.value)}
-              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-600"
+              className="bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
             />
 
-            <input
-              type="date"
-              value={startDate}
-              onChange={e => setStartDate(e.target.value)}
-              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600"
-            />
+            {/* FECHA INICIO */}
+            <div className="space-y-1">
+              <label className="text-xs uppercase tracking-wide text-gray-400">
+                Fecha inicio
+              </label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={e => setStartDate(e.target.value)}
+                onClick={e =>
+                  (e.currentTarget as HTMLInputElement).showPicker?.()
+                }
+                className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-600"
+              />
+            </div>
 
-            <input
-              type="date"
-              value={endDate}
-              onChange={e => setEndDate(e.target.value)}
-              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600"
-            />
+            {/* FECHA FIN */}
+            <div className="space-y-1">
+              <label className="text-xs uppercase tracking-wide text-gray-400">
+                Fecha fin
+              </label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={e => setEndDate(e.target.value)}
+                onClick={e =>
+                  (e.currentTarget as HTMLInputElement).showPicker?.()
+                }
+                className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-600"
+              />
+            </div>
+
           </div>
 
           {/* TIPO TOP */}
           <div className="flex gap-3">
             <button
               onClick={() => setTopType('payPeriod')}
-              className={`flex-1 py-3 rounded-lg font-semibold transition ${topType === 'payPeriod'
+              className={`flex-1 py-3 rounded-xl font-semibold transition ${
+                topType === 'payPeriod'
                   ? 'bg-red-600 text-white'
                   : 'bg-black border border-zinc-700 text-gray-300'
-                }`}
+              }`}
             >
               👤 PAY PERIOD
             </button>
 
             <button
               onClick={() => setTopType('studios')}
-              className={`flex-1 py-3 rounded-lg font-semibold transition ${topType === 'studios'
+              className={`flex-1 py-3 rounded-xl font-semibold transition ${
+                topType === 'studios'
                   ? 'bg-red-600 text-white'
                   : 'bg-black border border-zinc-700 text-gray-300'
-                }`}
+              }`}
             >
               🏢 STUDIOS
             </button>
@@ -162,27 +184,29 @@ export default function TopPayPeriodPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setGender('men')}
-                className={`flex-1 py-3 rounded-lg font-semibold transition ${gender === 'men'
+                className={`flex-1 py-3 rounded-xl font-semibold transition ${
+                  gender === 'men'
                     ? 'bg-red-600 text-white'
                     : 'bg-black border border-zinc-700 text-gray-300'
-                  }`}
+                }`}
               >
                 👦 HOMBRES
               </button>
 
               <button
                 onClick={() => setGender('women')}
-                className={`flex-1 py-3 rounded-lg font-semibold transition ${gender === 'women'
+                className={`flex-1 py-3 rounded-xl font-semibold transition ${
+                  gender === 'women'
                     ? 'bg-red-600 text-white'
                     : 'bg-black border border-zinc-700 text-gray-300'
-                  }`}
+                }`}
               >
                 👩 MUJERES
               </button>
             </div>
           )}
 
-          {/* INPUT */}
+          {/* INPUT TEXTO */}
           <TopInput
             currentText={text}
             setCurrentText={setText}
@@ -193,14 +217,12 @@ export default function TopPayPeriodPage() {
                 ? '🏆 GENERAR TOP PAY PERIOD'
                 : '🏆 GENERAR TOP STUDIOS'
             }
-            
           />
-
 
           {/* LIMPIAR */}
           <button
             onClick={clearAll}
-            className="w-full bg-black border border-zinc-700 hover:border-red-600 transition py-3 rounded-lg text-gray-300"
+            className="w-full bg-black border border-zinc-700 hover:border-red-600 transition py-3 rounded-xl text-gray-300"
           >
             LIMPIAR TODO
           </button>
