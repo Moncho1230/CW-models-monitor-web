@@ -59,9 +59,7 @@ export default function TopPayPeriodPage() {
           dateRange
         )
       )
-    }
-
-    if (topType === 'studios') {
+    } else {
       setResult(
         formatStudiosTop(
           rows,
@@ -86,116 +84,135 @@ export default function TopPayPeriodPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Top Generator</h1>
+    <div className="min-h-screen bg-black text-white px-6 py-14">
+      <div className="max-w-4xl mx-auto">
 
-      {/* Metadata */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input
-          placeholder="Día (Ej: DÍA 3)"
-          value={day}
-          onChange={e => setDay(e.target.value)}
-          className="border p-2 rounded"
-        />
-
-        <input
-          placeholder="Campeón"
-          value={champion}
-          onChange={e => setChampion(e.target.value)}
-          className="border p-2 rounded"
-        />
-
-        <input
-          type="date"
-          value={startDate}
-          onChange={e => setStartDate(e.target.value)}
-          className="border p-2 rounded"
-        />
-
-        <input
-          type="date"
-          value={endDate}
-          onChange={e => setEndDate(e.target.value)}
-          className="border p-2 rounded"
-        />
-      </div>
-
-      {/* Tipo de Top */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => setTopType('payPeriod')}
-          className={`px-4 py-2 rounded ${
-            topType === 'payPeriod'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200'
-          }`}
-        >
-          👤 Pay Period
-        </button>
-
-        <button
-          onClick={() => setTopType('studios')}
-          className={`px-4 py-2 rounded ${
-            topType === 'studios'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200'
-          }`}
-        >
-          🏢 Studios
-        </button>
-      </div>
-
-      {/* Género SOLO Pay Period */}
-      {topType === 'payPeriod' && (
-        <div className="flex gap-2">
-          <button
-            onClick={() => setGender('men')}
-            className={`px-4 py-2 rounded ${
-              gender === 'men'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200'
-            }`}
-          >
-            👦 Hombres
-          </button>
-
-          <button
-            onClick={() => setGender('women')}
-            className={`px-4 py-2 rounded ${
-              gender === 'women'
-                ? 'bg-pink-500 text-white'
-                : 'bg-gray-200'
-            }`}
-          >
-            👩 Mujeres
-          </button>
+        {/* HEADER */}
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-extrabold tracking-wide">
+            🏆 <span className="text-white">TOP</span>{' '}
+            <span className="text-red-600">
+              {topType === 'payPeriod' ? 'PAY PERIOD' : 'STUDIOS'}
+            </span>
+          </h1>
+          <p className="text-gray-400 mt-2">
+            Generador oficial de rankings CW Models
+          </p>
         </div>
-      )}
 
-      <TopInput
-        currentText={text}
-        setCurrentText={setText}
-        onAddTop={generate}
-        feedback={feedback}
-        buttonLabel={
-          topType === 'payPeriod'
-            ? '🏆 Generar Top Pay Period'
-            : '🏆 Generar Top Studios'
-        }
-      />
+        {/* CARD */}
+        <div className="bg-zinc-900 rounded-2xl p-8 shadow-xl space-y-6">
 
-      {result && (
-        <>
-          <TopPreview text={result} />
+          {/* METADATA */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              placeholder="Día (Ej: DÍA 3)"
+              value={day}
+              onChange={e => setDay(e.target.value)}
+              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-600"
+            />
 
+            <input
+              placeholder="Campeón"
+              value={champion}
+              onChange={e => setChampion(e.target.value)}
+              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-600"
+            />
+
+            <input
+              type="date"
+              value={startDate}
+              onChange={e => setStartDate(e.target.value)}
+              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600"
+            />
+
+            <input
+              type="date"
+              value={endDate}
+              onChange={e => setEndDate(e.target.value)}
+              className="bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600"
+            />
+          </div>
+
+          {/* TIPO TOP */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => setTopType('payPeriod')}
+              className={`flex-1 py-3 rounded-lg font-semibold transition ${topType === 'payPeriod'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-black border border-zinc-700 text-gray-300'
+                }`}
+            >
+              👤 PAY PERIOD
+            </button>
+
+            <button
+              onClick={() => setTopType('studios')}
+              className={`flex-1 py-3 rounded-lg font-semibold transition ${topType === 'studios'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-black border border-zinc-700 text-gray-300'
+                }`}
+            >
+              🏢 STUDIOS
+            </button>
+          </div>
+
+          {/* GÉNERO SOLO PAY PERIOD */}
+          {topType === 'payPeriod' && (
+            <div className="flex gap-3">
+              <button
+                onClick={() => setGender('men')}
+                className={`flex-1 py-3 rounded-lg font-semibold transition ${gender === 'men'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-black border border-zinc-700 text-gray-300'
+                  }`}
+              >
+                👦 HOMBRES
+              </button>
+
+              <button
+                onClick={() => setGender('women')}
+                className={`flex-1 py-3 rounded-lg font-semibold transition ${gender === 'women'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-black border border-zinc-700 text-gray-300'
+                  }`}
+              >
+                👩 MUJERES
+              </button>
+            </div>
+          )}
+
+          {/* INPUT */}
+          <TopInput
+            currentText={text}
+            setCurrentText={setText}
+            onAddTop={generate}
+            feedback={feedback}
+            buttonLabel={
+              topType === 'payPeriod'
+                ? '🏆 GENERAR TOP PAY PERIOD'
+                : '🏆 GENERAR TOP STUDIOS'
+            }
+            
+          />
+
+
+          {/* LIMPIAR */}
           <button
             onClick={clearAll}
-            className="bg-gray-800 text-white px-4 py-2 rounded w-full"
+            className="w-full bg-black border border-zinc-700 hover:border-red-600 transition py-3 rounded-lg text-gray-300"
           >
-            🧹 Limpiar
+            LIMPIAR TODO
           </button>
-        </>
-      )}
+        </div>
+
+        {/* RESULTADO */}
+        {result && (
+          <div className="mt-10">
+            <TopPreview text={result} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
