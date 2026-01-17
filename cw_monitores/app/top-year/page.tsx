@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import TopInput from '@/components/ui/TopInput'
 import TopPreview from '@/components/preview/TopPreview'
@@ -59,6 +60,22 @@ export default function TopAnualPage() {
   return (
     <div className="min-h-screen bg-black text-white px-6 py-14">
       <div className="max-w-4xl mx-auto">
+        <Link
+          href="/"
+          className="
+    inline-flex items-center gap-2
+    mb-6
+    px-4 py-2
+    rounded-xl
+    bg-black border border-zinc-700
+    text-gray-300 font-medium
+    hover:border-red-600 hover:text-white
+    transition
+  "
+        >
+          ← Volver al inicio
+        </Link>
+
 
         {/* HEADER */}
         <div className="mb-10 text-center">
@@ -100,12 +117,12 @@ export default function TopAnualPage() {
             feedback={feedback}
             gender={gender}
             setGender={setGender}
-            
+
           />
 
           {/* BOTONES */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-           
+
 
             <button
               onClick={generateTop}

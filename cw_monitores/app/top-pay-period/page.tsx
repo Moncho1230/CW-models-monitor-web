@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import TopInput from '@/components/ui/TopInput'
 import TopPreview from '@/components/preview/TopPreview'
 import { parseTextRank } from '@/lib/parsers/parseTextRank'
@@ -86,6 +87,22 @@ export default function TopPayPeriodPage() {
   return (
     <div className="min-h-screen bg-black text-white px-6 py-14">
       <div className="max-w-4xl mx-auto">
+        <Link
+          href="/"
+          className="
+    inline-flex items-center gap-2
+    mb-6
+    px-4 py-2
+    rounded-xl
+    bg-black border border-zinc-700
+    text-gray-300 font-medium
+    hover:border-red-600 hover:text-white
+    transition
+  "
+        >
+          ← Volver al inicio
+        </Link>
+
 
         {/* HEADER */}
         <div className="mb-10 text-center">
@@ -158,22 +175,20 @@ export default function TopPayPeriodPage() {
           <div className="flex gap-3">
             <button
               onClick={() => setTopType('payPeriod')}
-              className={`flex-1 py-3 rounded-xl font-semibold transition ${
-                topType === 'payPeriod'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-black border border-zinc-700 text-gray-300'
-              }`}
+              className={`flex-1 py-3 rounded-xl font-semibold transition ${topType === 'payPeriod'
+                ? 'bg-red-600 text-white'
+                : 'bg-black border border-zinc-700 text-gray-300'
+                }`}
             >
               👤 PAY PERIOD
             </button>
 
             <button
               onClick={() => setTopType('studios')}
-              className={`flex-1 py-3 rounded-xl font-semibold transition ${
-                topType === 'studios'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-black border border-zinc-700 text-gray-300'
-              }`}
+              className={`flex-1 py-3 rounded-xl font-semibold transition ${topType === 'studios'
+                ? 'bg-red-600 text-white'
+                : 'bg-black border border-zinc-700 text-gray-300'
+                }`}
             >
               🏢 STUDIOS
             </button>
@@ -184,22 +199,20 @@ export default function TopPayPeriodPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setGender('men')}
-                className={`flex-1 py-3 rounded-xl font-semibold transition ${
-                  gender === 'men'
-                    ? 'bg-red-600 text-white'
-                    : 'bg-black border border-zinc-700 text-gray-300'
-                }`}
+                className={`flex-1 py-3 rounded-xl font-semibold transition ${gender === 'men'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-black border border-zinc-700 text-gray-300'
+                  }`}
               >
                 👦 HOMBRES
               </button>
 
               <button
                 onClick={() => setGender('women')}
-                className={`flex-1 py-3 rounded-xl font-semibold transition ${
-                  gender === 'women'
-                    ? 'bg-red-600 text-white'
-                    : 'bg-black border border-zinc-700 text-gray-300'
-                }`}
+                className={`flex-1 py-3 rounded-xl font-semibold transition ${gender === 'women'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-black border border-zinc-700 text-gray-300'
+                  }`}
               >
                 👩 MUJERES
               </button>
