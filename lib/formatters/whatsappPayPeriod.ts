@@ -31,15 +31,23 @@ export function formatPayPeriodTop(
     3: '🥉'
   }
 
+  const prizeEmojis: Record<number, string> = {
+    1: '🚀💰',
+    2: '🛸💰',
+    3: '🚁💰',
+    4: '🚢💰'
+  }
+
+
   const lines: string[] = [
     '*TOP MODELS FOR PAY PERIOD*',
-    '🏆💎🔥',
+    '🥇🏆🚀💎',
     '',
     `*${day.toUpperCase()}*`,
     '',
     `*${genderLabel.toUpperCase()}*`,
     '',
-    `*CAMPEÓN: ${champion.toUpperCase()}*`,
+    `*CAMPEÓN: ${champion.toUpperCase()}*🏆🏵️🎊🎉✨️`,
     '',
     dateRange,
     ''
@@ -52,8 +60,10 @@ export function formatPayPeriodTop(
     lines.push(`${medal} ${row.name.toUpperCase()} (${row.credits.toLocaleString()})`)
 
     if (premios[pos]) {
-      lines.push(`🏅💰 ${premios[pos]}`)
+      const prizeIcon = prizeEmojis[pos] ?? '🏅💰'
+      lines.push(`${prizeIcon} ${premios[pos]}`)
     }
+
   })
 
   return lines.join('\n')

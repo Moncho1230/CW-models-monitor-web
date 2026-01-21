@@ -5,35 +5,61 @@ export function formatStudiosTop(
   day: string,
   champion: string,
   dateRange: string
-) {
-  const header = [
-    '*TOP STUDIOS FOR PAY PERIOD* 🏆 ✅ 🥇🎊💎🤩🥳',
+): string {
+
+  // 💰 Premios por posición
+  const premios: Record<number, string> = {
+    1: '$300.000',
+    2: '$250.000',
+    3: '$200.000',
+    4: '$150.000',
+    5: '$100.000'
+  }
+
+  // 🏅 Medallas
+  const medals: Record<number, string> = {
+    1: '🥇',
+    2: '🥈',
+    3: '🥉'
+  }
+
+  // 🚀 Emojis especiales para premios TOP
+  const prizeIcons: Record<number, string> = {
+    1: '🚀💰',
+    2: '🛸💰',
+    3: '🚁💰',
+    4: '🚢💰'
+  }
+
+  const lines: string[] = [
+    '*TOP STUDIOS FOR PAY PERIOD* 🏆 ✅ 🥇🎊💎🤩🥳 💪🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊',
     '',
     `*CAMPEON: ${champion.toUpperCase()}*`,
     '',
     `(${dateRange})`,
     '',
-    `*${day}*`,
+    `*${day.toUpperCase()}*`,
     ''
   ]
 
-  const body = rows.map((row, index) => {
-    const position = index + 1
+  rows.forEach((row, index) => {
+    const pos = index + 1
+    const medal = medals[pos] ?? `#${pos}`
 
-    if (position === 1) {
-      return `🥇 ${row.name.toUpperCase()} (${row.credits})`
+    // 📊 Créditos formateados con separador
+    const creditsFormatted = Number(row.credits).toLocaleString('en-US')
+
+    lines.push(
+      `${medal} ${row.name.toUpperCase()} (${creditsFormatted})`
+    )
+
+    // 💰 Línea de premio
+    if (premios[pos]) {
+      const icon = prizeIcons[pos] ?? '🏅💰'
+      lines.push(`${icon} ${premios[pos]}`)
     }
-
-    if (position === 2) {
-      return `🥈 ${row.name.toUpperCase()} (${row.credits})`
-    }
-
-    if (position === 3) {
-      return `🥉 ${row.name.toUpperCase()} (${row.credits})`
-    }
-
-    return `#${position} ${row.name.toUpperCase()} (${row.credits})`
   })
 
-  return [...header, ...body].join('\n')
+  return lines.join('\n')
 }
+

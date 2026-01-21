@@ -21,6 +21,7 @@ export function formatTopAnual(
 
   const lines: string[] = [
     `FLIRT OF THE YEAR ${year} 🏆🔥🎉🏆🎊💪💖🎊🎊🎊🎊🎊
+    🎊🎊🎊🎊🎊🎊🎊🎊🎊
 *The Best*`,
     `*${genderLabel.toUpperCase()}*`,
     ''
